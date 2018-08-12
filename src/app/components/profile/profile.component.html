@@ -1,0 +1,58 @@
+  <div class="card">
+  <div class="card-body">
+  <form [formGroup]="profileForm" class="pt-5" novalidate>
+  	<div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" name="fname" formControlName="fname"  placeholder="First Name"  #fname>
+    </div>
+    <div *ngIf="profileForm.controls['fname'].invalid && (profileForm.controls['fname'].dirty || profileForm.controls['fname'].touched)" class="alert alert-danger">
+        <div *ngIf="profileForm.controls['fname'].errors.required">
+          First Name is required.
+        </div>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Last Name" formControlName="lname"  name="lname" #lname>
+    </div>
+    <div *ngIf="profileForm.controls['lname'].invalid && (profileForm.controls['lname'].dirty || profileForm.controls['lname'].touched)" class="alert alert-danger">
+        <div *ngIf="profileForm.controls['lname'].errors.required">
+          Last Name is required.
+        </div>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">@</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username"  name="username" formControlName="username" #username>
+    </div>
+    <div *ngIf="profileForm.controls['username'].invalid && (profileForm.controls['username'].dirty || profileForm.controls['username'].touched)" class="alert alert-danger">
+        <div *ngIf="profileForm.controls['username'].errors.required">
+          User Name is required.
+        </div>
+    </div>
+    <div class="form-group">
+      <input type="file"  class="form-control-file border" name="profile_img" formControlName="profile_img" #profile_img >
+    </div>
+    <div *ngIf="profileForm.controls['profile_img'].invalid && (profileForm.controls['profile_img'].dirty || profileForm.controls['profile_img'].touched)" class="alert alert-danger">
+        <div *ngIf="profileForm.controls['profile_img'].errors.required">
+          Profile Images is required.
+        </div>
+    </div>
+    <button type="submit"  value="Upload photo" (click)="Addprofile(fname.value, lname.value, username.value, profile_img.value)" class="btn btn-primary" [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
+  </form>
+  <form action="/postPhotos" enctype="multipart/form-data" [formGroup]="profileFormm" class="pt-5" novalidate>
+    <input type="file" class="form-control" formControlName="singleInputFileName" name="singleInputFileName" #singleInputFileName>
+    <div *ngIf="profileFormm.controls['singleInputFileName'].invalid && (profileFormm.controls['singleInputFileName'].dirty || profileFormm.controls['singleInputFileName'].touched)" class="alert alert-danger">
+        <div *ngIf="profileFormm.controls['singleInputFileName'].errors.required">
+          Profile Images is required.
+        </div>
+    </div>
+    <input type="submit" value="Upload photo" [disabled]="profileFormm.pristine || profileFormm.invalid">
+</form>
+ </div>
+ </div>
+

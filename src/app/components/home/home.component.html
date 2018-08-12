@@ -1,0 +1,13 @@
+<div class="container" *ngFor="let profile of profiles">
+  <h2 class="p-2">UserName: {{profile.username}}</h2>
+  <div class="card" style="width:400px">
+    <img class="card-img-top" src="uploads/{{profile.profile_img}}" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">{{profile.fname}}</h4>
+      <h4 class="card-title">{{profile.lname}}</h4>
+      <a [routerLink]="['/edit', profile._id]" class="btn btn-primary">Edit Profile</a>
+      <button (click)="deleteAdUnit(profile._id)"  class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>
+
