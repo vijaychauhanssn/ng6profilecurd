@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const ProfiletRoutes = express.Router();
+var fs = require('fs');
 
 // Require AddProfile model in our routes module
 let AddProfile = require('../models/AddProfile');
@@ -10,6 +11,13 @@ let AddProfile = require('../models/AddProfile');
 // Defined store route
 ProfiletRoutes.route('/add').post(function (req, res) {
   let addProfile = new AddProfile(req.body);
+    var oldpath = files.filetoupload.path;
+      var newpath = 'C:/Users/Prateek/' + files.filetoupload.name;
+      fs.rename(oldpath, newpath, function (err) {
+        if (err) throw err;
+        res.write('File uploaded and moved!');
+        res.end();
+      });
   addProfile.save()
     .then(game => {
     res.status(200).json({'addProfile': 'AddProfile in added successfully'});

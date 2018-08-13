@@ -9,13 +9,11 @@ import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   profileForm:FormGroup;
-  profileFormm:FormGroup;
   constructor(
     private profileservice:ProfileService,
     private fb:FormBuilder ) 
      {
       this.createForm(); 
-      this.createFormm(); 
      }
 
      createForm(){
@@ -26,13 +24,6 @@ export class ProfileComponent implements OnInit {
      		profile_img:['', Validators.required]
      	});
       }
-      createFormm(){
-      this.profileFormm = this.fb.group({
-        singleInputFileName:['', Validators.required]
-        
-      });
-     }
-
      Addprofile(fname, lname, username, profile_img){
      	this.profileservice.Addprofile(fname, lname, username, profile_img);
      }

@@ -1,6 +1,6 @@
   <div class="card">
   <div class="card-body">
-  <form [formGroup]="profileForm" class="pt-5" novalidate>
+  <form [formGroup]="profileForm" class="pt-5" novalidate method="post" enctype="multipart/form-data">
   	<div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">@</span>
@@ -44,15 +44,6 @@
     </div>
     <button type="submit"  value="Upload photo" (click)="Addprofile(fname.value, lname.value, username.value, profile_img.value)" class="btn btn-primary" [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
   </form>
-  <form action="/postPhotos" enctype="multipart/form-data" [formGroup]="profileFormm" class="pt-5" novalidate>
-    <input type="file" class="form-control" formControlName="singleInputFileName" name="singleInputFileName" #singleInputFileName>
-    <div *ngIf="profileFormm.controls['singleInputFileName'].invalid && (profileFormm.controls['singleInputFileName'].dirty || profileFormm.controls['singleInputFileName'].touched)" class="alert alert-danger">
-        <div *ngIf="profileFormm.controls['singleInputFileName'].errors.required">
-          Profile Images is required.
-        </div>
-    </div>
-    <input type="submit" value="Upload photo" [disabled]="profileFormm.pristine || profileFormm.invalid">
-</form>
  </div>
  </div>
 
