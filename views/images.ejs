@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Hello. Here you can see all your uploaded images with description.</h1>
+    <a class="btn btn-success" href="/">Upload New</a>
+    <div class="container">
+        <div class="row">
+            <% for (var i = 0; i < data.length; i++) { %>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="<%= data[i].path %>">
+                        <div class="caption">
+                            <h3><%= data[i].description %></h3>
+                        </div>
+                        <form method="post" action="/remove_image">
+                            <input type="hidden" name="image_document_id" value="<%= data[i]._id %>">
+                            <input type="hidden" name="image_name" value="<%= data[i].path %>">
+                            <button type="submit" class="btn">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

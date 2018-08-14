@@ -1,9 +1,6 @@
-// profile.route.js
-
 const express = require('express');
 const app = express();
 const ProfiletRoutes = express.Router();
-var fs = require('fs');
 
 // Require AddProfile model in our routes module
 let AddProfile = require('../models/AddProfile');
@@ -11,13 +8,6 @@ let AddProfile = require('../models/AddProfile');
 // Defined store route
 ProfiletRoutes.route('/add').post(function (req, res) {
   let addProfile = new AddProfile(req.body);
-    var oldpath = files.filetoupload.path;
-      var newpath = 'C:/Users/Prateek/' + files.filetoupload.name;
-      fs.rename(oldpath, newpath, function (err) {
-        if (err) throw err;
-        res.write('File uploaded and moved!');
-        res.end();
-      });
   addProfile.save()
     .then(game => {
     res.status(200).json({'addProfile': 'AddProfile in added successfully'});
@@ -42,21 +32,21 @@ ProfiletRoutes.route('/').get(function (req, res) {
 // Defined edit route
 ProfiletRoutes.route('/edit/:id').get(function (req, res) {
   let id = req.params.id;
-  AddProfile.findById(id, function (err, adUnit){
-      res.json(adUnit);
+  AddProfile.findById(id, function (err, addProfile){
+      res.json(addProfile);
   });
 });
 
 //  Defined update route
 ProfiletRoutes.route('/update/:id').post(function (req, res) {
-    AddProfile.findById(req.params.id, function(err, adUnit) {
-    if (!adUnit)
+    AddProfile.findById(req.params.id, function(err, addProfile) {
+    if (!addProfile)
       return next(new Error('Could not load Document'));
     else {
-        adUnit.unit_name = req.body.unit_name;
-        adUnit.unit_price = req.body.unit_price;
-
-        adUnit.save().then(adUnit => {
+        addProfile.fname = req.body.fname;
+        addProfile.lname = req.body.lname;
+        addProfile.profile_img = req.body.profile_img;
+        addProfile.save().then(addProfile => {
           res.json('Update complete');
       })
       .catch(err => {
@@ -68,7 +58,7 @@ ProfiletRoutes.route('/update/:id').post(function (req, res) {
 
 // Defined delete | remove | destroy route
 ProfiletRoutes.route('/delete/:id').get(function (req, res) {
-    AddProfile.findByIdAndRemove({_id: req.params.id}, function(err, adUnit){
+    AddProfile.findByIdAndRemove({_id: req.params.id}, function(err, addProfile){
         if(err) res.json(err);
         else res.json('Successfully removed');
     });

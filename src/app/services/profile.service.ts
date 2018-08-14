@@ -18,7 +18,7 @@ export class ProfileService {
   				fname:fname,
   				lname:lname,
   				username:username,
-  				profile_img:profile_img				
+  				profile_img:profile_img
   			};
   			this.http.post(`${this.ApiUrl}/add`, obj)
   			.subscribe(res => console.log('Created'));

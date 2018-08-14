@@ -24,8 +24,8 @@ export class ProfileComponent implements OnInit {
      		profile_img:['', Validators.required]
      	});
       }
-     Addprofile(fname, lname, username, profile_img){
-     	this.profileservice.Addprofile(fname, lname, username, profile_img);
+     Addprofile(fname, lname, username, profile_img, file){
+     	this.profileservice.Addprofile(fname, lname, username, profile_img, file);
      }
 
   ngOnInit() {

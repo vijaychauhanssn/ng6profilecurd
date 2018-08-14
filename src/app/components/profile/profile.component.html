@@ -1,6 +1,6 @@
   <div class="card">
   <div class="card-body">
-  <form [formGroup]="profileForm" class="pt-5" novalidate method="post" enctype="multipart/form-data">
+  <form [formGroup]="profileForm" class="pt-5" novalidate>
   	<div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text">@</span>
@@ -42,6 +42,7 @@
           Profile Images is required.
         </div>
     </div>
+
     <button type="submit"  value="Upload photo" (click)="Addprofile(fname.value, lname.value, username.value, profile_img.value)" class="btn btn-primary" [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
   </form>
  </div>
