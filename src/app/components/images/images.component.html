@@ -1,0 +1,13 @@
+  <form [formGroup] = "ImageForm" action="/fileupload" method="post" enctype="multipart/form-data" novalidate>
+        <label for="file">Choose File: </label>
+        <input type="file" name="file"  formControleName="file"   #file>
+        <label for="description">Input Image Description: </label>
+        <input type="text" name="description" formControleName="description" #description>
+        <br />
+         <button type="submit"   (click)="Addimage(file.value,  description.value)" class="btn btn-primary" [disabled]>Add  Submit</button>
+    </form>
+
+    <div *ngFor="let profile of profiles">
+    	<div>{{profile.file}}</div>
+    	<div>{{profile.description}}</div>
+    </div>

@@ -1,7 +1,4 @@
-var express = require('express')
-var bodyParser = require('body-parser')
 var app = express()
-//var ejs = require('ejs')
 var multer = require('multer')
 
 var path = require('path')
@@ -9,7 +6,8 @@ var fs = require('fs')
 
 var mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-const ImagesRoutes = express.Router();
+// Require AddProfile model in our routes module
+let AddImage = require('../models/AddImage');
 
 app.get('/', function (req, res, next) {
     res.render('index')
@@ -31,8 +29,6 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-
-
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, './uploads')
@@ -52,7 +48,7 @@ app.post('/file_upload', upload.single('file'), function (req, res) {
     image.description = req.body.description
     image.save(function (err) {
         if (err) return next(err)
-        return res.redirect('/home')
+        return res.redirect('/images')
     })
 })
 
@@ -72,4 +68,3 @@ app.post('/remove_image', upload.single('file'), function (req, res) {
     })
 })
 
-module.exports = ImagesRoutes;

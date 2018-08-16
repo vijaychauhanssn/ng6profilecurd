@@ -13,12 +13,11 @@ export class ProfileService {
   	console.log('Profile Service is working');
   }
 
-  Addprofile(fname, lname, username, profile_img){
+  Addprofile(fname, lname, username){
   			const obj = {
   				fname:fname,
   				lname:lname,
-  				username:username,
-  				profile_img:profile_img
+  				username:username
   			};
   			this.http.post(`${this.ApiUrl}/add`, obj)
   			.subscribe(res => console.log('Created'));
@@ -32,16 +31,14 @@ export class ProfileService {
       return this.http.get(`${this.ApiUrl}/edit/${id}`);
   }
 
-    updateAdUnit(fname, lname,username,profile_img, id) {
-
-    const obj = {
+    updateAdUnit(fname, lname, username, id) {
+   const obj = {
           fname:fname,
           lname:lname,
-          username:username,
-          profile_img:profile_img 
+          username:username
       };
       this.http.post(`${this.ApiUrl}/update/${id}`, obj)
-        .subscribe(res => console.log('Done'));
+        .subscribe(res => console.log('Updated'));
     }
 
       deleteAdUnit(id) {

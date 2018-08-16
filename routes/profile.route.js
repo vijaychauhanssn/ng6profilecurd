@@ -1,9 +1,39 @@
 const express = require('express');
 const app = express();
 const ProfiletRoutes = express.Router();
-
+var multer = require('multer');
+var path =require('path');
+var fs = require('fs');
+var formidable = require('formidable');
 // Require AddProfile model in our routes module
 let AddProfile = require('../models/AddProfile');
+// Require AddProfile model in our routes module
+let AddImage = require('../models/AddImage');
+
+//Define Add Image
+  var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'src/app/assets/uploads/uploads')
+    },
+    filename: function (req, file, callback, files) {
+        callback(null, files.fieldname + '-' + Date.now() + path.extname(files.originalname))
+    }
+    })
+    
+  var upload = multer({
+      storage: storage
+  })
+
+  ProfiletRoutes.route('/addimg').post(function (req, res){
+      let addImage = new AddImage(req.body);
+      addImage.save()
+        .then(game => {
+        res.status(200).json({'addImage': 'AddProfile in added successfully'});
+        })
+        .catch(err => {
+        res.status(400).send("unable to save to database");
+        });
+  });
 
 // Defined store route
 ProfiletRoutes.route('/add').post(function (req, res) {
@@ -45,7 +75,8 @@ ProfiletRoutes.route('/update/:id').post(function (req, res) {
     else {
         addProfile.fname = req.body.fname;
         addProfile.lname = req.body.lname;
-        addProfile.profile_img = req.body.profile_img;
+        addProfile.username = req.body.username;
+       // addProfile.profile_img = req.body.profile_img;
         addProfile.save().then(addProfile => {
           res.json('Update complete');
       })
@@ -63,5 +94,8 @@ ProfiletRoutes.route('/delete/:id').get(function (req, res) {
         else res.json('Successfully removed');
     });
 });
+
+
+
 
 module.exports = ProfiletRoutes;

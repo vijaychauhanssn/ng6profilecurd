@@ -27,14 +27,13 @@ export class EditComponent implements OnInit {
      	this.profileForm = this.fb.group({
      		fname:['', Validators.required],
      		lname:['', Validators.required],
-     		username:['', Validators.required],
-     		profile_img:['', Validators.required]
+     		username:['', Validators.required]
      	});
      }
      
- updateAdUnit(fname, lname, username, profile_img) {
+ updateAdUnit(fname, lname, username) {
       this.route.params.subscribe(params => {
-          this.profileservice.updateAdUnit(fname, lname,username,profile_img, params['id']);
+          this.profileservice.updateAdUnit(fname, lname, username, params['id']);
           this.router.navigate(['home']);
       });
     }

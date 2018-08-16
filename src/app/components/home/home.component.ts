@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit() {
   	this.profileservice.getProfile().subscribe((data:AddProfile[]) =>{
-  		this.profiles =data;
+  		this.profiles = data ;
   	});
   }
 

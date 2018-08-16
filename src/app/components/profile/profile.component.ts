@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
   profileForm:FormGroup;
   constructor(
     private profileservice:ProfileService,
-    private fb:FormBuilder ) 
+    private fb:FormBuilder) 
      {
       this.createForm(); 
      }
@@ -20,12 +20,11 @@ export class ProfileComponent implements OnInit {
      	this.profileForm = this.fb.group({
      		fname:['', Validators.required],
      		lname:['', Validators.required],
-     		username:['', Validators.required],
-     		profile_img:['', Validators.required]
+     		username:['', Validators.required]
      	});
       }
-     Addprofile(fname, lname, username, profile_img, file){
-     	this.profileservice.Addprofile(fname, lname, username, profile_img, file);
+     Addprofile(fname, lname, username, profile_img){
+     	this.profileservice.Addprofile(fname, lname, username);
      }
 
   ngOnInit() {

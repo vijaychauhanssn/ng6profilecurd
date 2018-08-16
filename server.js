@@ -4,9 +4,9 @@
     cors = require('cors'),
     mongoose = require('mongoose'),
     config = require('./config/db');
-
-    const app = express();
-
+   var fs = require('fs');
+   const app = express();
+    var formidable = require('formidable');
     mongoose.Promise = global.Promise;
     mongoose.connect(config.db).then(
       () => {console.log('Database is connected') },

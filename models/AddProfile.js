@@ -14,14 +14,10 @@ let AddProfile = new Schema({
   },
   username: {
   	type:String
-  },
-  profile_img: { 
-     data: Buffer, contentType: String
   }
+
 },{
     collection: 'profiles'
 });
-
-
 
 module.exports = mongoose.model('AddProfile', AddProfile);
