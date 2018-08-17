@@ -7,19 +7,19 @@ import {AddImage} from '../models/AddImage';
 })
 export class ImageService {
 
-ApiUrl  = 'http://localhost:8080';	
+ApiUrl  = 'http://localhost:4000/profiles';	
 	
   constructor(private http:HttpClient) 
   {
   console.log('Image service is working');
   }
 
-  Addimage(file, description){
+  Addimage(image, description){
   			const obj = {
-  				file:file,
+  				image:image,
   				description:description
   			};
-  			return this.http.post(`${this.ApiUrl}`, obj)
+  			return this.http.post(`${this.ApiUrl}/addimg`, obj)
   			.subscribe(res => console.log('Created'));
   }
 getImage(){

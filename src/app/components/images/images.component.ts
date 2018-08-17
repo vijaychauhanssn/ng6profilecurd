@@ -18,13 +18,13 @@ export class ImagesComponent implements OnInit {
 
   imageAdd(){
   	this.ImageForm = this.formbuilder.group({
-  		file: ['', Validators.required],
+  		image: ['', Validators.required],
   		description: ['', Validators.required]
   	});
   }
 
-  Addimage(file, description){
-  		this.imageservice.Addimage(file, description);
+  Addimage(image, description){
+  		this.imageservice.Addimage(image, description);
   }
 
   ngOnInit() {

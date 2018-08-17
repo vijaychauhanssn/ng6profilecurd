@@ -49,11 +49,15 @@ app.use(express.static(__dirname + '/uploads'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+//app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('view engine', 'ejs')
+var engines = require('consolidate');
 
+app.set('views', __dirname + '/views');
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
+    destination: function (req, file, callback, filename) {
         callback(null, './uploads')
     },
     filename: function (req, file, callback) {
@@ -65,7 +69,7 @@ var upload = multer({
     storage: storage
 })
 
-app.post('src/app/components/image/file_upload', upload.single('file'), function (req, res) {
+app.post('/file_upload', upload.single('file'), function (req, res, filename) {
     var image = new Model()
     image.path = req.file.filename
     image.description = req.body.description

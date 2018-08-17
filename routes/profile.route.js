@@ -11,31 +11,31 @@ let AddProfile = require('../models/AddProfile');
 let AddImage = require('../models/AddImage');
 
 //Define Add Image
-  var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, 'src/app/assets/uploads/uploads')
-    },
-    filename: function (req, file, callback, files) {
-        callback(null, files.fieldname + '-' + Date.now() + path.extname(files.originalname))
-    }
-    })
-    
-  var upload = multer({
-      storage: storage
-  })
-  
-
-  ProfiletRoutes.route('/addimg').post( function (req, res, files){
-      var addImage = new AddImage;
-      addImage.file.data=fs.readFileSync(req.files.file.path);
-      addImage.file.contentType = `image/png`;
-      addImage.save()
+  ProfiletRoutes.route('/addimg').post( function (req, res){
+      
+      let addImage = new AddImage(req.body);
+      if (req.url == '/fileupload') {
+          var form = new formidable.IncomingForm();
+          form.parse(req, function (err, fields, files) {
+            var oldpath = files.image.path;
+            var newpath = 'uploads/uploads  ' + files.image.name;
+            fs.rename(oldpath, newpath, function (err) {
+              if (err) throw err;
+              res.write('File uploaded and moved!');
+              res.end();
+            });
+       });    
+        }
+        else{
+        addImage.save()
         .then(game => {
         res.status(200).json({'addImage': 'AddProfile in added successfully'});
         })
         .catch(err => {
         res.status(400).send("unable to save to database");
-        });
+        });          
+        }
+
   });
 
 // Defined store route
