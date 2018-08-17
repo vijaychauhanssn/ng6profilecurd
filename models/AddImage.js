@@ -14,7 +14,7 @@ var path = require('path');
 // Define collection and schema for AdUnits
 let AddImage = new Schema({
   file: {
-    type: String
+    data: Buffer, ContentType:String
   },
   description: {
     type: String

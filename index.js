@@ -11,6 +11,14 @@ var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/testdatabase')
 mongoose.Promise = global.Promise
 
+ app.use(function(req, res, next) {
+res.header("Access-Control-Allow-Origin", '*');
+res.header("Access-Control-Allow-Credentials", true);
+res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+next();
+});
+
 var Schema = mongoose.Schema
 
 var ImagesModel = new Schema({
@@ -41,6 +49,7 @@ app.use(express.static(__dirname + '/uploads'))
 app.use(bodyParser.urlencoded({
     extended: false
 }))
+
 app.set('view engine', 'ejs')
 
 var storage = multer.diskStorage({
@@ -56,7 +65,7 @@ var upload = multer({
     storage: storage
 })
 
-app.post('/file_upload', upload.single('file'), function (req, res) {
+app.post('src/app/components/image/file_upload', upload.single('file'), function (req, res) {
     var image = new Model()
     image.path = req.file.filename
     image.description = req.body.description
@@ -81,7 +90,7 @@ app.post('/remove_image', upload.single('file'), function (req, res) {
         })
     })
 })
-
+app.use(express.static(path.join(__dirname, 'src/app')));
 app.listen(8080, function () {
     console.log('Node.js listening on port ' + 8080)
 })

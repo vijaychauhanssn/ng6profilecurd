@@ -23,9 +23,12 @@ let AddImage = require('../models/AddImage');
   var upload = multer({
       storage: storage
   })
+  
 
-  ProfiletRoutes.route('/addimg').post(function (req, res){
-      let addImage = new AddImage(req.body);
+  ProfiletRoutes.route('/addimg').post( function (req, res, files){
+      var addImage = new AddImage;
+      addImage.file.data=fs.readFileSync(req.files.file.path);
+      addImage.file.contentType = `image/png`;
       addImage.save()
         .then(game => {
         res.status(200).json({'addImage': 'AddProfile in added successfully'});
@@ -94,8 +97,4 @@ ProfiletRoutes.route('/delete/:id').get(function (req, res) {
         else res.json('Successfully removed');
     });
 });
-
-
-
-
 module.exports = ProfiletRoutes;
