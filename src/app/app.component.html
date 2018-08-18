@@ -23,6 +23,14 @@
   </div>
 </nav>
 
+<input type="file" (change)="fileChangeEvent($event)"  name="recfile"  placeholder="Upload file..." accept=".pdf,.jpeg,.png" />
+<button type="button" (click)="upload()">Upload</button>
+<form action="fileupload" method="post" enctype="multipart/form-data">
+    <input type="file" name="filetoupload"><br>
+    <input type="submit" (click)="imgupload()">
+    </form>
+  
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>
