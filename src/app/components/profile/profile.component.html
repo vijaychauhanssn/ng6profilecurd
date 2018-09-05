@@ -34,7 +34,7 @@
           User Name is required.
         </div>
     </div>
-    <button type="submit"  value="Upload photo" (click)="Addprofile(fname.value, lname.value, username.value)" class="btn btn-primary" [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
+    <button type="submit"  value="Upload photo" (click)="Addprofile(fname.value, lname.value, username.value); showSuccess()" class="btn btn-primary" [disabled]="profileForm.pristine || profileForm.invalid">Submit</button>
   </form>
  </div>
  </div>

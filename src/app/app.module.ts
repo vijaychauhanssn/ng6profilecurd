@@ -1,35 +1,28 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //FormModule
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 //routing
 import {AppRoutingModule} from './app.routing';
-//profile service
-import {ProfileService} from './services/profile.service';
-import {ImageService} from './services/image.service';
-//end service
 
-import {RouterModule, Routes} from '@angular/router';
+//Toast
+import { ToastrModule } from 'ngx-toastr';
+
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditComponent } from './components/edit/edit.component';
 import { HomeComponent } from './components/home/home.component';
-import { ImagesComponent } from './components/images/images.component';
-import { ImageseditComponent } from './components/imagesedit/imagesedit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     EditComponent,
-    HomeComponent,
-    ImagesComponent,
-    ImageseditComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +30,15 @@ import { ImageseditComponent } from './components/imagesedit/imagesedit.componen
     SlimLoadingBarModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      timeOut: 30000,
+      positionClass: 'toast-top-center',
+      preventDuplicates: true,
+    })
   ],
-  providers: [ProfileService, ImageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

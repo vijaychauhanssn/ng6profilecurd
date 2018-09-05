@@ -6,6 +6,8 @@
     config = require('./config/db');
    var fs = require('fs');
    const app = express();
+   const multer = require('multer');
+ 
     var formidable = require('formidable');
     mongoose.Promise = global.Promise;
     mongoose.connect(config.db).then(
@@ -27,6 +29,26 @@
 
     app.use('/profiles', ProfiletRoutes);
 
+    /* Setup File upload */
+    const upload = multer({
+      limits: { fileSize: 5 * 1024 * 1024 },
+      storage: multer.diskStorage({
+        destination(req, file, cb) {
+          cb(null, 'avatars/'); // avatars Save the file to a folder.
+        },
+        filename(req, file, cb) {
+          cb(null, file.originalname); // Transferred files Save files by their names.
+        }
+      })
+    });
+
+    /* ROUTERS */
+    app.post('/upload', upload.single('avatar'), (req, res) => {
+      console.log('UPLOAD SUCCESS!', req.file);
+      res.json({ success: true, file: req.file });
+    });
+
     const server = app.listen(port, function(){
      console.log('Listening on port ' + port);
+
     });

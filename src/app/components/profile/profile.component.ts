@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProfileService} from '../../services/profile.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-
+import {  ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -11,6 +11,7 @@ export class ProfileComponent implements OnInit {
   profileForm:FormGroup;
   constructor(
     private profileservice:ProfileService,
+    private toastrService: ToastrService,
     private fb:FormBuilder) 
      {
       this.createForm(); 
@@ -29,5 +30,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  showSuccess() {
+    this.toastrService.success( 'Profile Created!');
+  }
 }

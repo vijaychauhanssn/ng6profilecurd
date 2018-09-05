@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {ProfileService} from '../../services/profile.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import {AddProfile} from '../../models/AddProfile';
-
+import {  ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -17,7 +17,8 @@ export class EditComponent implements OnInit {
   	private route: ActivatedRoute,
     private router: Router,
     private profileservice: ProfileService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastrService: ToastrService,
   	)
   	{
       this.createForm(); 
@@ -45,6 +46,8 @@ export class EditComponent implements OnInit {
       });
     });
   }
-  
+  showSuccess() {
+    this.toastrService.success( 'Profile Updated!');
+  }
 
 }

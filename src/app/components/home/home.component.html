@@ -1,13 +1,38 @@
+
+
 <div class="container" *ngFor="let profile of profiles">
-  <h2 class="p-2">UserName: {{profile.username}}</h2>
-  <div class="card" style="width:400px">
-    <img class="card-img-top" src="uploads/{{profile.profile_img}}" alt="Card image" style="width:100%">
-    <div class="card-body">
-      <h4 class="card-title">{{profile.fname}}</h4>
-      <h4 class="card-title">{{profile.lname}}</h4>
-      <a [routerLink]="['/edit', profile._id]" class="btn btn-primary">Edit Profile</a>
-      <button (click)="deleteAdUnit(profile._id)"  class="btn btn-danger">Delete</button>
+  <div class="card">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h2 class="p-2">Username: {{profile.username}}</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit(fileInput.files)">
+        <div class="card-body">
+            <div class="form-group">
+                <img *ngIf="imageSrc" [src]="imageSrc" class="avatar">
+                <div class="btns clearfix">
+                  <label class="btn btn-file btn-cancel pull-left">Pick an image
+                    <input type="file" accept="image/*" (change)="onFileChange(fileInput.files)"  #fileInput>
+                  </label>
+                  <button type="submit" class="btn btn-save pull-right" [disabled]="form.invalid || loading">
+                    Save
+                    <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i>
+                  </button>
+                </div>
+              </div>
+            <h4 class="card-title">First Name: {{profile.fname}}</h4>
+            <h4 class="card-title">Last Name: {{profile.lname}}</h4>
+            <h4 class="card-title">User Name: {{profile.username}}</h4>
+            <a [routerLink]="['/edit', profile._id]" class="btn btn-primary">Edit Profile</a>
+            &nbsp;  &nbsp;  &nbsp;
+            <button (click)="deleteAdUnit(profile._id)"  class="btn btn-danger ">Delete</button>
+          </div>
+      </form>
+    </div>
+    <div  class="col-sm-12 col-md-6 pt-50">
+        <pre>{{ form.value | json }}</pre>
+        <pre>{{ result | json }}</pre>
+        <pre>{{ profile | json }}</pre>
     </div>
   </div>
 </div>
-
+</div>

@@ -2,6 +2,7 @@ var http = require('http');
 var formidable = require('formidable');
 var fs = require('fs');
 
+var multer = require("multer");
 
 
 var express = require("express");
@@ -18,7 +19,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.post("/upload",  function(req, res) {
+app.post("/upload", multer({dest: "./uploads/"}).array("uploads[]", 12), function(req, res) {
     res.send(req.files);
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files, path) {

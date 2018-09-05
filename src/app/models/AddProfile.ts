@@ -4,5 +4,6 @@ export interface AddProfile {
 			lname:string,
 			username:string,
 			image:string,
+			imageSrc:string,
 			profile_img:string
 }
