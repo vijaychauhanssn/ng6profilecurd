@@ -33,7 +33,7 @@ import { HomeComponent } from './components/home/home.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     ToastrModule.forRoot({
-      timeOut: 30000,
+      timeOut: 2000,
       positionClass: 'toast-top-center',
       preventDuplicates: true,
     })

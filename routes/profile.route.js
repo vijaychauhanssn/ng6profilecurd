@@ -3,40 +3,9 @@ const app = express();
 const ProfiletRoutes = express.Router();
 var multer = require('multer');
 var path =require('path');
-var fs = require('fs');
-var formidable = require('formidable');
 // Require AddProfile model in our routes module
 let AddProfile = require('../models/AddProfile');
-// Require AddProfile model in our routes module
-let AddImage = require('../models/AddImage');
 
-//Define Add Image
-  ProfiletRoutes.route('/addimg').post( function (req, res){
-      
-      let addImage = new AddImage(req.body);
-      if (req.url == '/fileupload') {
-          var form = new formidable.IncomingForm();
-          form.parse(req, function (err, fields, files) {
-            var oldpath = files.image.path;
-            var newpath = 'uploads/uploads  ' + files.image.name;
-            fs.rename(oldpath, newpath, function (err) {
-              if (err) throw err;
-              res.write('File uploaded and moved!');
-              res.end();
-            });
-       });    
-        }
-        else{
-        addImage.save()
-        .then(game => {
-        res.status(200).json({'addImage': 'AddProfile in added successfully'});
-        })
-        .catch(err => {
-        res.status(400).send("unable to save to database");
-        });          
-        }
-
-  });
 
 // Defined store route
 ProfiletRoutes.route('/add').post(function (req, res) {
@@ -79,7 +48,6 @@ ProfiletRoutes.route('/update/:id').post(function (req, res) {
         addProfile.fname = req.body.fname;
         addProfile.lname = req.body.lname;
         addProfile.username = req.body.username;
-       // addProfile.profile_img = req.body.profile_img;
         addProfile.save().then(addProfile => {
           res.json('Update complete');
       })
@@ -92,9 +60,12 @@ ProfiletRoutes.route('/update/:id').post(function (req, res) {
 
 // Defined delete | remove | destroy route
 ProfiletRoutes.route('/delete/:id').get(function (req, res) {
-    AddProfile.findByIdAndRemove({_id: req.params.id}, function(err, addProfile){
+    AddProfile.deleteOne({_id: req.params.id}, function(err, addProfile){
         if(err) res.json(err);
         else res.json('Successfully removed');
+         setTimeout(()=> {
+                this._id = true;
+            }, 1000);
     });
 });
 module.exports = ProfiletRoutes;

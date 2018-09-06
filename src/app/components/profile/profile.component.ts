@@ -30,6 +30,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  //create toast
   showSuccess() {
     this.toastrService.success( 'Profile Created!');
   }

@@ -42,5 +42,5 @@ export class ProfileService {
 
       deleteAdUnit(id) {
         return this.http.get(`${this.ApiUrl}/delete/${id}`);
-      }
+    }
 }

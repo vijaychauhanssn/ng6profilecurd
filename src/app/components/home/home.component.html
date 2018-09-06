@@ -24,7 +24,7 @@
             <h4 class="card-title">User Name: {{profile.username}}</h4>
             <a [routerLink]="['/edit', profile._id]" class="btn btn-primary">Edit Profile</a>
             &nbsp;  &nbsp;  &nbsp;
-            <button (click)="deleteAdUnit(profile._id)"  class="btn btn-danger ">Delete</button>
+            <button (click)="deleteAdUnit(profile._id); showSuccess()"  class="btn btn-danger ">Delete</button>
           </div>
       </form>
     </div>

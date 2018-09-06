@@ -14,6 +14,7 @@
       () => {console.log('Database is connected') },
       err => { console.log('Can not connect to the database'+ err)}
     );
+    //core access control send a rquest in server
     app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
     res.header("Access-Control-Allow-Credentials", true);

@@ -3,6 +3,7 @@ import {ProfileService} from '../../services/profile.service';
 import {AddProfile} from '../../models/AddProfile';
 import { FormGroup,  FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {  ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,19 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
  profiles:AddProfile[];
 
-  //constructor(private profileservice:ProfileService) { }
 
+ constructor(
+    private profileservice:ProfileService,
+    private toastrService :ToastrService,
+    private  fb :  FormBuilder ,
+    private http: HttpClient) {
+    this.form = this.fb.group({
+      avatar: ['', Validators.required],
+    });
+  }
 
   deleteAdUnit(id) {
     this.profileservice.deleteAdUnit(id).subscribe(res => {
@@ -34,14 +44,7 @@ export class HomeComponent implements OnInit {
    imageSrc = '/assets/imgs/img_avatar1.png';
 
   result ; // data received from server after file upload
-  constructor(
-    private profileservice:ProfileService,
-    private  fb :  FormBuilder ,
-    private http: HttpClient) {
-    this.form = this.fb.group({
-      avatar: ['', Validators.required],
-    });
-  }
+
 
   onFileChange(files: FileList) {
     if (files && files.length > 0) {
@@ -85,5 +88,9 @@ export class HomeComponent implements OnInit {
 
   get avatar() {
     return this.form.get('avatar');
+  }
+  //profile Deleted
+  showSuccess() {
+    this.toastrService.success( 'Profile Deleted!');
   }
 }
