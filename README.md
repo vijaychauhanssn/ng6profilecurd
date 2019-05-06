@@ -1,5 +1,7 @@
 # Ng6profilecurd
 
+## [GIT CLONE](https://github.com/vijaychauhanssn/ng6profilecurd)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
 ## Development server
@@ -13,6 +15,15 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Author
+ Vijaychauhanssn
+## [Demo](https://ng6profilecurd.herokuapp.com/)
+
+![REg](https://pbs.twimg.com/media/D528PeKU0AE8fSy.png:large) 
+![Login](https://pbs.twimg.com/media/D528OZ5UUAAbOkV.jpg:large) 
+## [Angular 6 CRUD](https://github.com/vijaychauhanssn/ng6profilecurd)
+
+
 
 ## Running unit tests
 
